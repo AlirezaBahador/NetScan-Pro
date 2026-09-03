@@ -1,4 +1,4 @@
-# netscan-pro
+# NetScan-Pro
 
 Async TCP/UDP network scanner with concurrent scanning, service banner
 grabbing, lightweight OS fingerprinting, a clean CLI, configurable
