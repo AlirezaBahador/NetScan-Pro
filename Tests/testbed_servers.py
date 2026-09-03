@@ -1,32 +1,48 @@
 """
-Dev/test harness: starts the local testbed services as background
-threads inside THIS process (no subprocess/backgrounding involved),
-then invokes the real CLI main() against 127.0.0.1. Produces a
-genuine, non-fabricated log + JSON result file for verification.
+Spins up a handful of local sockets on 127.0.0.1 that mimic real
+services (a fake SSH banner, a tiny HTTP server, an echoing UDP
+socket) purely so the scanner has something real to find during local
+testing / CI. Not part of the shipped package — dev/test only.
 """
-import os
-import sys
+import http.server
+import socket
+import threading
 import time
 
-sys.path.insert(0, "/usr/lib/python3/dist-packages/pip/_vendor")  # dev-only: borrow rich for local testing
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from testbed_servers import start_fake_ssh, start_http, start_udp_echo
+def start_fake_ssh(port=2222):
+    def serve():
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        s.bind(("127.0.0.1", port))
+        s.listen(5)
+        while True:
+            conn, _ = s.accept()
+            conn.sendall(b"SSH-2.0-OpenSSH_9.6p1 Ubuntu-3\r\n")
+            conn.close()
+    threading.Thread(target=serve, daemon=True).start()
 
-start_fake_ssh(2222)
-start_http(8080)
-start_udp_echo(9999)
-time.sleep(0.3)
 
-from netscan.cli import main
+def start_http(port=8080):
+    handler = http.server.SimpleHTTPRequestHandler
+    server = http.server.HTTPServer(("127.0.0.1", port), handler)
+    threading.Thread(target=server.serve_forever, daemon=True).start()
 
-exit_code = main([
-    "127.0.0.1",
-    "-p", "20-25,80,443,2222,3306,8080,8443,9999",
-    "--udp",
-    "--udp-ports", "9999,53,161,123",
-    "-vv",
-    "-o", "/tmp/results_final.json",
-])
-print(f"\n[harness] CLI exit code: {exit_code}")
+
+def start_udp_echo(port=9999):
+    def serve():
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.bind(("127.0.0.1", port))
+        while True:
+            data, addr = s.recvfrom(1024)
+            s.sendto(b"ECHO:" + data, addr)
+    threading.Thread(target=serve, daemon=True).start()
+
+
+if __name__ == "__main__":
+    start_fake_ssh(2222)
+    start_http(8080)
+    start_udp_echo(9999)
+    print("Testbed services running on 127.0.0.1: TCP 2222 (fake ssh), TCP 8080 (http), UDP 9999 (echo)")
+    while True:
+        time.sleep(3600)
