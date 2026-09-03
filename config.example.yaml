@@ -1,1 +1,14 @@
+# Copy to config.yaml and adjust as needed.
+# Any field omitted here falls back to the built-in default.
+
+concurrency: 500        # simultaneous in-flight probes
+connect_timeout: 1.2    # seconds, TCP connect
+udp_timeout: 1.5        # seconds, UDP response wait
+banner_timeout: 1.5     # seconds, waiting for a service banner
+retries: 1              # UDP retransmits
+top_ports: 1000         # used when -p/--ports is omitted
+rate_limit: 0           # probes/sec throttle, 0 = unlimited
+resolve_hostnames: true
+os_fingerprint: true
+output_format: table    # table | json | csv
 
