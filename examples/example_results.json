@@ -1,0 +1,144 @@
+[
+  {
+    "host": "127.0.0.1",
+    "os_guess": "unavailable (no 'ping' binary on this system)",
+    "ports": [
+      {
+        "port": 20,
+        "proto": "tcp",
+        "state": "closed",
+        "service": "unknown",
+        "banner": null,
+        "latency_ms": null
+      },
+      {
+        "port": 21,
+        "proto": "tcp",
+        "state": "closed",
+        "service": "unknown",
+        "banner": null,
+        "latency_ms": null
+      },
+      {
+        "port": 22,
+        "proto": "tcp",
+        "state": "closed",
+        "service": "unknown",
+        "banner": null,
+        "latency_ms": null
+      },
+      {
+        "port": 23,
+        "proto": "tcp",
+        "state": "closed",
+        "service": "unknown",
+        "banner": null,
+        "latency_ms": null
+      },
+      {
+        "port": 24,
+        "proto": "tcp",
+        "state": "closed",
+        "service": "unknown",
+        "banner": null,
+        "latency_ms": null
+      },
+      {
+        "port": 25,
+        "proto": "tcp",
+        "state": "closed",
+        "service": "unknown",
+        "banner": null,
+        "latency_ms": null
+      },
+      {
+        "port": 80,
+        "proto": "tcp",
+        "state": "closed",
+        "service": "unknown",
+        "banner": null,
+        "latency_ms": null
+      },
+      {
+        "port": 443,
+        "proto": "tcp",
+        "state": "closed",
+        "service": "unknown",
+        "banner": null,
+        "latency_ms": null
+      },
+      {
+        "port": 2222,
+        "proto": "tcp",
+        "state": "open",
+        "service": "ssh",
+        "banner": "SSH-2.0-OpenSSH_9.6p1 Ubuntu-3",
+        "latency_ms": 1.5
+      },
+      {
+        "port": 3306,
+        "proto": "tcp",
+        "state": "closed",
+        "service": "unknown",
+        "banner": null,
+        "latency_ms": null
+      },
+      {
+        "port": 8080,
+        "proto": "tcp",
+        "state": "open",
+        "service": "http",
+        "banner": "HTTP Server: SimpleHTTP/0.6 Python/3.12.3",
+        "latency_ms": 1.2
+      },
+      {
+        "port": 8443,
+        "proto": "tcp",
+        "state": "closed",
+        "service": "unknown",
+        "banner": null,
+        "latency_ms": null
+      },
+      {
+        "port": 9999,
+        "proto": "tcp",
+        "state": "closed",
+        "service": "unknown",
+        "banner": null,
+        "latency_ms": null
+      },
+      {
+        "port": 53,
+        "proto": "udp",
+        "state": "closed",
+        "service": "dns",
+        "banner": null,
+        "latency_ms": null
+      },
+      {
+        "port": 123,
+        "proto": "udp",
+        "state": "closed",
+        "service": "ntp",
+        "banner": null,
+        "latency_ms": null
+      },
+      {
+        "port": 161,
+        "proto": "udp",
+        "state": "closed",
+        "service": "snmp",
+        "banner": null,
+        "latency_ms": null
+      },
+      {
+        "port": 9999,
+        "proto": "udp",
+        "state": "open",
+        "service": "unknown",
+        "banner": "ECHO:\u0000",
+        "latency_ms": null
+      }
+    ]
+  }
+        ]
